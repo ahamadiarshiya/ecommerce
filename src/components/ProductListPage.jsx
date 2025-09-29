@@ -1,26 +1,43 @@
-import React from 'react';
 import '../styles/ProductListPage.css';
 
-// Dummy data example - you can replace with import from products.js later
-const products = [
-  { id: 1, name: 'Product One', price: 29.99 },
-  { id: 2, name: 'Product Two', price: 59.99 },
-  { id: 3, name: 'Product Three', price: 99.99 },
-];
+import React, { useEffect, useState } from "react";
+
 
 function ProductListPage() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    fetch("https://fakestoreapi.com/products", {
+      headers: {
+        Authorization: `Bearer ${token}`, // optional for fakestore
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) return <h2 style={{ textAlign: "center" }}>Loading products...</h2>;
+
   return (
-    <div className="product-list-container">
-      <h2>Products</h2>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id} className="product-item">
-            <h3>{product.name}</h3>
-            <p>Price: ${product.price.toFixed(2)}</p>
-            <button>View Details</button>
-          </li>
+    <div className="product-list">
+      <h1>Our Products</h1>
+      <div className="grid">
+        {products.map((p) => (
+          <div key={p.id} className="product-card">
+            <img src={p.image} alt={p.title} />
+            <h3>{p.title}</h3>
+            <p>${p.price}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
