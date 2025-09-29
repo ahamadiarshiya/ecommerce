@@ -1,0 +1,100 @@
+body{
+  background-image: url('../data/login example (1).jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  
+}
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.login-background {
+ 
+  height: 100vh;
+  display: flex;
+  margin-top: 120px;
+  margin-left: 150px;
+
+}
+
+
+.login-box h2 {
+  font-size: 40px;
+  margin-left:30px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.login-box p {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+}
+
+
+.login-btn {
+  width: 50%;
+  margin-left:70px;
+margin-top: 15px;
+  background-color: #333;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: black;
+}
+.image{
+  margin-left: 450px;
+  margin-top: 70px;
+}
+h1{
+  font-family:cursive;
+  font-size: 40px;
+  margin-left: 60px;
+
+}
+.description{
+  /* margin-left: 90px; */
+  margin-top: 5px;
+}
+
