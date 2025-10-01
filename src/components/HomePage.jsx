@@ -1,21 +1,11 @@
+import React from 'react';
+import ProductList from '../components/ProductList';
 import '../styles/HomePage.css';
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-function HomePage() {
-  const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
-
+export default function HomePage() {
   return (
-    <div>hiiii</div>
+    <div className="homepage">
+      <ProductList />
+    </div>
   );
 }
-
-
-export default HomePage;

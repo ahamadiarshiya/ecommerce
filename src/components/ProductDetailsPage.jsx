@@ -16,11 +16,15 @@ function ProductDetailsPage() {
 
   return (
     <div className="product-details-page">
-      <h1>{product.title}</h1>
+      
       <img src={product.image} alt={product.title} />
+      
+      <div className="details">
+      <h1>{product.title}</h1>
       <p><strong>Price:</strong> ${product.price}</p>
-      <p>{product.description}</p>
+      <p><strong>Description:</strong>{product.description}</p>
       <p><strong>Category:</strong> {product.category}</p>
+      </div>
     </div>
   );
 }
