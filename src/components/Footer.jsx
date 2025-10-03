@@ -1,11 +1,12 @@
-// components/Footer.js
+// Footer.jsx
 import React from 'react';
-import '../styles/HomePage.css';
+import '../styles/Footer.css';
 
 export default function Footer() {
   return (
-    <footer className="footer">
-      <p>&copy; 2025 My eCommerce Store. All rights reserved.</p>
+    <footer id="footer">
+      <p>© 2025 Cartify. All rights reserved.</p>
     </footer>
   );
 }
+

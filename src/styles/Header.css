@@ -1,4 +1,4 @@
-.header-hero {
+/* .header-hero {
   display: flex;
   align-items: center;
   justify-content: space-between; 
@@ -35,4 +35,142 @@ h1 {
   margin-top: 4px;
   color: #333;
   font-family: Arial, Helvetica, sans-serif;
+} */
+ .header {
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
+  padding: 0.8rem 2rem;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
+.header-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Left Section */
+.logo-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-img {
+  width: 45px;
+  height: 45px;
+  margin-right: 0.6rem;
+}
+
+.brand-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff5e00;
+}
+
+/* Navigation */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ff5e00;
+}
+
+/* Right Section */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-search {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.header-search:focus {
+  border-color: #ff5e00;
+  box-shadow: 0px 4px 8px rgba(255, 94, 0, 0.3);
+}
+
+/* Icons */
+.icon-link {
+  display: flex;
+  align-items: center;
+}
+
+.icon-img {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icon-img:hover {
+  transform: scale(1.1);
+}
+
+/* Cart */
+.cart-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  gap: 0.3rem;
+}
+
+.cart-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+/* Dropdown */
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-title {
+  font-weight: 500;
+  color: #333;
+  padding: 0.5rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  min-width: 160px;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: #ff5e00;
+  color: #fff;
+}
+

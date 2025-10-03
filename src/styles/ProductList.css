@@ -1,10 +1,10 @@
-.product-list {
+/* .product-list {
   text-align: center;
   padding: 1rem;
-  background-color: orange;
+  background-color:#ff5f01;
 }
 
-/* search bar container aligned to left */
+
 .search-container {
   display: flex;
   justify-content: flex-start;
@@ -12,7 +12,7 @@
   margin-left: 20px;
 }
 
-/* fancy search bar */
+
 .search-bar {
   width: 250px;
   padding: 0.7rem 1rem;
@@ -68,9 +68,123 @@
   margin: 0 0 0.6rem 0; 
 }
 .add-btn{
-  background-color: black;
+  background-color: #ff5e00;
   color: white;
   width: 150px;
   height: 30px;
   border-radius: 20px;
+} */
+ /* Main wrapper */
+.product-list {
+  background: #f8f8f8;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+/* Search bar */
+.search-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+}
+
+.search-bar {
+  width: 280px;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.search-bar:focus {
+  border-color: #ff5e00;
+  box-shadow: 0px 4px 10px rgba(255, 94, 0, 0.3);
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+/* Product Card */
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #eee;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Image */
+.product-image-container {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.product-card img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+}
+
+/* Title & Price */
+.product-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0.5rem 0;
+  color: #333;
+  height: 45px; /* fix uneven card height */
+  overflow: hidden;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ff5e00;
+  margin-bottom: 1rem;
+}
+
+/* Add to Cart */
+.add-btn {
+  background-color: #ff5e00;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.add-btn:hover {
+  background-color: #e65100;
+}
+
+/* Links inside cards */
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
