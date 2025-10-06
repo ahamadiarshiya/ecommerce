@@ -8,7 +8,7 @@ export default function Layout() {
     <>
       <Header />
       <main>
-        <Outlet /> {/* Nested route pages render here */}
+        <Outlet />
       </main>
       <Footer />
     </>

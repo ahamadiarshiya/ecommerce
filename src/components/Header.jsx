@@ -1,76 +1,107 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
 
 export default function Header() {
   const [categories, setCategories] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
   const navigate = useNavigate();
+
   useEffect(() => {
-    // fetch categories from API
-    fetch("https://fakestoreapi.com/products/categories")
+    fetch('https://dummyjson.com/products/categories')
       .then(res => res.json())
-      .then(data => setCategories(data))
-      .catch(err => console.error(err));
+      .then(data => {
+
+        if (Array.isArray(data)) setCategories(data);
+        else setCategories([]);
+      })
+      .catch(err => {
+        console.error('Error fetching categories:', err);
+        setCategories([]);
+      });
   }, []);
 
-  const handleCategoryClick = (category) => {
-    navigate(`/products?category=${category}`);
-    setShowDropdown(false);
+
+  const goToProducts = () => {
+    navigate('/products');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+
   const scrollToFooter = () => {
-    const footer = document.getElementById("footer");
-    if (footer) footer.scrollIntoView({ behavior: "smooth" });
+    const footer = document.getElementById('footer');
+    if (footer) footer.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSearch = e => {
+    e.preventDefault();
+    if (searchInput.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchInput.trim())}`);
+      setSearchInput('');
+    }
   };
 
   return (
     <header className="header">
       <div className="header-hero">
-        {/* Left: Logo */}
-        <div className="header-left" style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={() => navigate('/products')}>
-          <img className="logo-img" src="src/data/logo.png" alt="logo" />
-          <h1 className="brand-name" style={{ marginLeft: '10px' }}>Cartify</h1>
+
+        <div className="header-left" onClick={goToProducts}>
+          <img src="src/data/logo.png" alt="logo" className="logo-img" />
+          <h1 className="brand-name">Cartify</h1>
         </div>
 
-        {/* Center: Navigation */}
+
         <nav className="nav-links">
           <Link to="/login">Login</Link>
-          <Link to="/products">Products</Link>
-          {/* Categories Dropdown */}
+          <span onClick={goToProducts}>Products</span>
+
+
           <div
             className="dropdown"
             onMouseEnter={() => setShowDropdown(true)}
             onMouseLeave={() => setShowDropdown(false)}
           >
             <span className="dropdown-title">Categories ▾</span>
-            {showDropdown && (
+            {showDropdown && Array.isArray(categories) && categories.length > 0 && (
               <div className="dropdown-menu">
-                <div className="dropdown-item" onClick={() => navigate('/products')}>All Products</div>
+                <div className="dropdown-item" onClick={goToProducts}>
+                  All Products
+                </div>
                 {categories.map((cat, idx) => (
                   <div
                     key={idx}
                     className="dropdown-item"
-                    onClick={() => handleCategoryClick(cat)}
+                    onClick={() => {
+
+                      const categoryParam = cat.slug || cat;
+                      navigate(`/products?category=${categoryParam}`);
+                      setShowDropdown(false);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
                   >
-                    {cat}
+                    {cat.name || cat}
                   </div>
                 ))}
               </div>
             )}
           </div>
-          <span onClick={scrollToFooter} style={{ cursor: 'pointer' }}>About</span>
-          <Link to="/contact">Contact</Link>
+
+          <span onClick={scrollToFooter}>About</span>
+          <span onClick={scrollToFooter}>Contact</span>
         </nav>
-        {/* Right: Search + Icons */}
+
+
         <div className="header-right">
-          <input type="text" placeholder="Search..." className="header-search" />
-          <Link to="/wishlist" className="icon-link">
-            <img src="src/data/heart.png" alt="wishlist" className="icon-img" />
-          </Link>
-          <Link to="/account" className="icon-link">
-            <img src="src/data/user.png" alt="profile" className="icon-img" />
-          </Link>
+          <form onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder="Search..."
+              className="header-search"
+              value={searchInput}
+              onChange={e => setSearchInput(e.target.value)}
+            />
+          </form>
           <Link to="/cart" className="cart-container">
             <img src="src/data/shopping-cart.png" alt="cartlogo" className="icon-img" />
             <span className="cart-label">Cart</span>

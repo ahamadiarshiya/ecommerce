@@ -1,42 +1,5 @@
-/* .header-hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; 
-  padding: 0 20px;         
-  height: 70px; 
-  position: sticky;
-  top:0;          
-}
 
-.logo-img {
-  margin-right: 10px;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-}
-
-h1 {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-}
-.cart-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  cursor: pointer;
-  padding-right:20px;
-  padding-top: 15px;
-}
-
-.cart-label {
-  font-size: 14px;
-  margin-top: 4px;
-  color: #333;
-  font-family: Arial, Helvetica, sans-serif;
-} */
- .header {
+.header {
   background: #fff;
   border-bottom: 1px solid #eaeaea;
   padding: 0.8rem 2rem;
@@ -44,6 +7,7 @@ h1 {
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .header-hero {
@@ -52,11 +16,11 @@ h1 {
   justify-content: space-between;
 }
 
-/* Left Section */
-.logo-container {
+
+.header-left {
   display: flex;
   align-items: center;
-  text-decoration: none;
+  cursor: pointer;
 }
 
 .logo-img {
@@ -71,24 +35,89 @@ h1 {
   color: #ff5e00;
 }
 
-/* Navigation */
+
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
 }
 
-.nav-links a {
+.nav-links a,
+.nav-links span {
   text-decoration: none;
   color: #333;
   font-weight: 500;
+  cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links span:hover {
   color: #ff5e00;
 }
 
-/* Right Section */
+
+.dropdown {
+  position: relative;
+  cursor: pointer; 
+}
+
+.dropdown-title {
+  font-weight: 500;
+  color: #333;
+  padding: 0.5rem;
+  cursor: pointer; 
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 1000; 
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+}
+
+
+.scrollable-dropdown {
+  max-height: 220px;       
+  overflow-y: auto;       
+  padding-right: 0.3rem;   
+}
+
+
+.scrollable-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-dropdown::-webkit-scrollbar-thumb {
+  background-color: #ff5e00;
+  border-radius: 3px;
+}
+
+.scrollable-dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dropdown-item {
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  color: #333;
+  transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer; 
+}
+
+.dropdown-item:hover {
+  background: #ff5e00;
+  color: #fff;
+}
+
+
 .header-right {
   display: flex;
   align-items: center;
@@ -108,11 +137,21 @@ h1 {
   box-shadow: 0px 4px 8px rgba(255, 94, 0, 0.3);
 }
 
-/* Icons */
-.icon-link {
+
+.cart-container {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: #333;
+  gap: 0.3rem;
+  cursor: pointer;
 }
+
+.cart-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 
 .icon-img {
   width: 22px;
@@ -125,52 +164,22 @@ h1 {
   transform: scale(1.1);
 }
 
-/* Cart */
-.cart-container {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #333;
-  gap: 0.3rem;
-}
 
-.cart-label {
-  font-size: 0.9rem;
-  font-weight: 500;
+@media screen and (max-width: 768px) {
+  .header-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .header-search {
+    flex: 1;
+  }
 }
-/* Dropdown */
-.dropdown {
-  position: relative;
-  cursor: pointer;
-}
-
-.dropdown-title {
-  font-weight: 500;
-  color: #333;
-  padding: 0.5rem;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 6px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-  min-width: 160px;
-  z-index: 1000;
-}
-
-.dropdown-item {
-  padding: 0.6rem 1rem;
-  font-size: 0.95rem;
-  color: #333;
-  transition: background 0.2s ease;
-}
-
-.dropdown-item:hover {
-  background: #ff5e00;
-  color: #fff;
-}
-

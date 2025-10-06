@@ -152,7 +152,7 @@
   font-weight: 500;
   margin: 0.5rem 0;
   color: #333;
-  height: 45px; /* fix uneven card height */
+  height: 45px; 
   overflow: hidden;
 }
 
@@ -163,7 +163,7 @@
   margin-bottom: 1rem;
 }
 
-/* Add to Cart */
+
 .add-btn {
   background-color: #ff5e00;
   color: #fff;
@@ -179,7 +179,6 @@
   background-color: #e65100;
 }
 
-/* Links inside cards */
 .product-link {
   text-decoration: none;
   color: inherit;
@@ -187,4 +186,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #ff5e00;
+  color: #fff;
+  border-color: #ff5e00;
+}
+
+.pagination button.active {
+  background-color: #ff5e00;
+  color: #fff;
+  border-color: #ff5e00;
 }

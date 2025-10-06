@@ -8,13 +8,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Default route redirects to login */}
         <Route path="/" element={<Navigate to="/login" replace />} />
-
-        {/* Login page WITHOUT header/footer */}
         <Route path="/login" element={<LoginPage />} />
-
-        {/* All other pages WITH header/footer */}
         <Route element={<Layout />}>
           <Route path="/products" element={<ProductList />} />
           <Route path="/products/:id" element={<ProductDetailsPage />} />
