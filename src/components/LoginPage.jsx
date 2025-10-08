@@ -24,7 +24,7 @@ function LoginPage() {
             </div>
             <div className="input-group">
               <label>Password</label>
-              <input type="password" placeholder="Enter your password" required />
+              <input type="password" placeholder="Enter your password" minLength="8" required />
             </div>
             <button type="submit" className="login-btn" >Login</button>
           </form>

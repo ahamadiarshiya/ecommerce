@@ -8,16 +8,40 @@ function ProductDetailsPage() {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
+  
+    window.scrollTo(0, 0);
 
+  
     fetch(`https://dummyjson.com/products/${id}`)
-      .then(res => res.json())
-      .then(data => setProduct(data))
-      .catch(err => console.error(err));
+      .then((res) => res.json())
+      .then((data) => setProduct(data))
+      .catch((err) => console.error(err));
   }, [id]);
 
   if (!product) return <p>Loading...</p>;
 
+
   const handleAddToCart = () => {
+
+    const existingCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+
+    const existingItemIndex = existingCart.findIndex(
+      (item) => item.id === product.id
+    );
+
+    if (existingItemIndex >= 0) {
+ 
+      existingCart[existingItemIndex].quantity += quantity;
+    } else {
+     
+      existingCart.push({ id: product.id, quantity });
+    }
+
+   
+    localStorage.setItem("cartItems", JSON.stringify(existingCart));
+
+   
     alert(`Added ${quantity} ${product.title}(s) to cart!`);
   };
 
@@ -25,16 +49,26 @@ function ProductDetailsPage() {
     <div className="product-details-page">
       <div className="image-container">
         <img
-          src={product.images && product.images.length > 0 ? product.images[0] : ""}
+          src={
+            product.images && product.images.length > 0
+              ? product.images[0]
+              : ""
+          }
           alt={product.title}
         />
       </div>
 
       <div className="details">
         <h1>{product.title}</h1>
-        <p className="price"><strong>Price:</strong> ${product.price}</p>
-        <p className="category"><strong>Category:</strong> {product.category}</p>
-        <p className="description"><strong>Description:</strong> {product.description}</p>
+        <p className="price">
+          <strong>Price:</strong> ${product.price}
+        </p>
+        <p className="category">
+          <strong>Category:</strong> {product.category}
+        </p>
+        <p className="description">
+          <strong>Description:</strong> {product.description}
+        </p>
 
         <div className="purchase">
           <label>
@@ -44,7 +78,9 @@ function ProductDetailsPage() {
               onChange={(e) => setQuantity(Number(e.target.value))}
             >
               {[...Array(10).keys()].map((i) => (
-                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
               ))}
             </select>
           </label>

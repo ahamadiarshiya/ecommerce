@@ -5,11 +5,15 @@ import '../styles/ProductList.css';
 export default function ProductList() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [addedIds, setAddedIds] = useState([]);
+  const [loading, setLoading] = useState(true);
   const productsPerPage = 12;
 
   const location = useLocation();
 
   useEffect(() => {
+    setLoading(true);
+
     const queryParams = new URLSearchParams(location.search);
     const category = queryParams.get('category');
     const search = queryParams.get('search');
@@ -31,31 +35,43 @@ export default function ProductList() {
 
         setProducts(filtered);
         setCurrentPage(1);
+        setLoading(false); 
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        setLoading(false); 
+      });
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location]);
-
 
   const indexOfLast = currentPage * productsPerPage;
   const indexOfFirst = indexOfLast - productsPerPage;
   const currentProducts = products.slice(indexOfFirst, indexOfLast);
   const totalPages = Math.ceil(products.length / productsPerPage);
-const cartItems = []
- const storeItems = (product) => {
-        console.log(product.id, "id")
-        cartItems.push( { id : product.id, quantity : "1" })
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-        alert(`Added 1 ${product.title}(s) to cart!`);
-   }
-   
+
+  const storeItems = (product) => {
+    const existingCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const itemIndex = existingCart.findIndex(item => item.id === product.id);
+
+    if (itemIndex >= 0) {
+      existingCart[itemIndex].quantity += 1;
+    } else {
+      existingCart.push({ id: product.id, quantity: 1 });
+    }
+
+    localStorage.setItem('cartItems', JSON.stringify(existingCart));
+    setAddedIds(prev => [...prev, product.id]);
+  };
+
+  if (loading) {
+    return null; 
+  }
+
   return (
     <div className="product-list">
       {products.length === 0 ? (
-        <h2 style={{ textAlign: 'center', marginTop: '2rem', color: '#ff5e00' }}>
-          No products found.
-        </h2>
+        <h2 className="no-products">No products found.</h2>
       ) : (
         <>
           <div className="product-grid">
@@ -71,21 +87,23 @@ const cartItems = []
                   <h3 className="product-title">{product.title}</h3>
                   <p className="product-price">${product.price}</p>
                 </Link>
-                <button className="add-btn" onClick={() => storeItems(product)}>Add to Cart</button>
+                <button
+                  className="add-btn"
+                  onClick={() => storeItems(product)}
+                  disabled={addedIds.includes(product.id)}
+                >
+                  {addedIds.includes(product.id) ? 'Added to Cart' : 'Add to Cart'}
+                </button>
               </div>
             ))}
           </div>
-
 
           <div className="pagination">
             {Array.from({ length: totalPages }, (_, i) => (
               <button
                 key={i}
                 className={`page-btn ${currentPage === i + 1 ? 'active' : ''}`}
-                onClick={() => {
-                  setCurrentPage(i + 1);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
+                onClick={() => setCurrentPage(i + 1)}
               >
                 {i + 1}
               </button>
